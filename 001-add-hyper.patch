@@ -1,0 +1,231 @@
+--- ./win32/include/rpc/types.h	2001-11-05 10:21:52 +0000
++++ ./win32/include/rpc/types.h	2011-08-28 00:05:34 +0000
+@@ -101,4 +101,6 @@
+ typedef unsigned long u_long;
+ typedef unsigned short u_short;
+ 
++#include <stdint.h>
++
+ #endif /* ndef __TYPES_RPC_HEADER__ */
+--- ./win32/include/rpc/xdr.h	2001-11-05 10:21:52 +0000
++++ ./win32/include/rpc/xdr.h	2011-08-28 02:45:04 +0000
+@@ -254,6 +254,12 @@
+ DllExport bool_t	xdr_u_int();
+ DllExport bool_t	xdr_long();
+ DllExport bool_t	xdr_u_long();
++DllExport bool_t	xdr_hyper();
++DllExport bool_t	xdr_u_hyper();
++DllExport bool_t	xdr_int32_t();
++DllExport bool_t	xdr_uint32_t();
++DllExport bool_t	xdr_int64_t();
++DllExport bool_t	xdr_uint64_t();
+ DllExport bool_t	xdr_short();
+ DllExport bool_t	xdr_u_short();
+ DllExport bool_t	xdr_bool();
+--- ./win32/librpc/Xdr.c	2001-11-05 10:21:54 +0000
++++ ./win32/librpc/Xdr.c	2011-08-28 02:44:18 +0000
+@@ -153,6 +153,74 @@
+ }
+ 
+ /*
++ * XDR hyper integers
++ */
++bool_t
++xdr_u_hyper(xdrs, lp)
++	register XDR *xdrs;
++	unsigned hyper *lp;
++{
++	if (xdrs->x_op == XDR_ENCODE) {
++		unsigned long l;
++
++		l = (*lp >> 32) & 0xffffffff;
++		if (!XDR_PUTLONG(xdrs, &l))
++			return (FALSE);
++
++		l = *lp & 0xffffffff;
++		return (XDR_PUTLONG(xdrs, &l));
++	}
++
++	if (xdrs->x_op == XDR_DECODE) {
++		unsigned long l;
++
++		if (!XDR_GETLONG(xdrs, &l))
++			return (FALSE);
++
++		*lp = l;
++		*lp = (*lp) << 32;
++		
++		if (!XDR_GETLONG(xdrs, &l))
++			return (FALSE);
++
++		*lp |= l;
++
++		return (TRUE);
++	}
++
++	if (xdrs->x_op == XDR_FREE)
++		return (TRUE);
++
++	return (FALSE);
++}
++
++bool_t
++xdr_hyper(xdrs, lp)
++	register XDR *xdrs;
++	hyper *lp;
++{
++	return xdr_u_hyper(xdrs, lp);
++}
++
++bool_t
++xdr_int64_t(xdrs, lp)
++	register XDR *xdrs;
++	hyper *lp;
++{
++	return xdr_u_hyper(xdrs, lp);
++}
++
++bool_t
++xdr_uint64_t(xdrs, lp)
++	register XDR *xdrs;
++	hyper *lp;
++{
++	return xdr_u_hyper(xdrs, lp);
++}
++
++
++
++/*
+  * XDR long integers
+  * same as xdr_u_long - open coded to save a proc call!
+  */
+@@ -174,6 +242,22 @@
+ 	return (FALSE);
+ }
+ 
++bool_t
++xdr_uint32_t(xdrs, lp)
++	register XDR *xdrs;
++	long *lp;
++{
++	return xdr_u_long(xdrs, lp);
++}
++bool_t
++xdr_int32_t(xdrs, lp)
++	register XDR *xdrs;
++	long *lp;
++{
++	return xdr_long(xdrs, lp);
++}
++
++
+ /*
+  * XDR unsigned long integers
+  * same as xdr_long - open coded to save a proc call!
+--- ./win32/librpc/all_oncrpc.h	2001-11-05 10:21:54 +0000
++++ ./win32/librpc/all_oncrpc.h	2011-08-27 21:43:06 +0000
+@@ -26,7 +26,7 @@
+ #define DllImport   __declspec( dllimport )
+ #endif
+ 
+-#if defined _W95 || defined _NT
++#if defined _W95 || defined _NT || defined _WINNT
+ #include <stdio.h>
+ #include <time.h>
+ #include <string.h>
+@@ -83,4 +83,4 @@
+ void bzero(char *s, int len);
+ int bcmp(char *s1, char *s2, int len);
+ 
+-#endif  /*__all_oncrpc_includes__*/
+\ No newline at end of file
++#endif  /*__all_oncrpc_includes__*/
+--- ./win32/librpc/makefile	2001-11-05 10:21:54 +0000
++++ ./win32/librpc/makefile	2011-08-27 21:38:18 +0000
+@@ -3,7 +3,7 @@
+ 
+ # If the rpc include directory is not included in the standard path
+ # you have to give the path to it here.
+-RPCINCLUDEPATH = ..
++RPCINCLUDEPATH = ..\include
+ 
+ # If the rpc library is not included in the standard lib path
+ # you have to give the path to it here.
+--- ./win32/librpc/oncrpc.def	2001-11-05 10:21:54 +0000
++++ ./win32/librpc/oncrpc.def	2011-08-28 02:44:40 +0000
+@@ -56,6 +56,11 @@
+ xdr_enum
+ xdr_float
+ xdr_free
++xdr_hyper
++xdr_int32_t
++xdr_uint32_t
++xdr_int64_t
++xdr_uint64_t
+ xdr_int
+ xdr_long
+ xdr_netobj
+@@ -70,6 +75,7 @@
+ xdr_string
+ xdr_u_char
+ xdr_u_int
++xdr_u_hyper
+ xdr_u_long
+ xdr_u_short
+ xdr_union
+--- ./win32/rpcgen/rpc_pars.c	2001-11-05 10:21:54 +0000
++++ ./win32/rpcgen/rpc_pars.c	2011-08-27 23:57:28 +0000
+@@ -393,6 +393,10 @@
+ 	case TOK_UNSIGNED:
+ 		unsigned_dec(typep);
+ 		break;
++	case TOK_HYPER:
++		*typep = "int64_t";
++		(void) peekscan(TOK_HYPER, &tok);
++		break;
+ 	case TOK_SHORT:
+ 		*typep = "short";
+ 		(void) peekscan(TOK_INT, &tok);
+@@ -434,6 +438,11 @@
+ 		get_token(&tok);
+ 		*typep = "u_char";
+ 		break;
++	case TOK_HYPER:
++		get_token(&tok);
++		*typep = "uint64_t";
++		(void) peekscan(TOK_HYPER, &tok);
++		break;
+ 	case TOK_SHORT:
+ 		get_token(&tok);
+ 		*typep = "u_short";
+--- ./win32/rpcgen/rpc_scan.c	2001-11-05 10:21:54 +0000
++++ ./win32/rpcgen/rpc_scan.c	2011-08-27 23:32:08 +0000
+@@ -404,6 +404,7 @@
+ 			  {TOK_INT, "int"},
+ 			  {TOK_UNSIGNED, "unsigned"},
+ 			  {TOK_SHORT, "short"},
++			  {TOK_HYPER, "hyper"},
+ 			  {TOK_LONG, "long"},
+ 			  {TOK_FLOAT, "float"},
+ 			  {TOK_DOUBLE, "double"},
+
+--- ./win32/rpcgen/rpc_scan.h	2001-11-05 10:21:54 +0000
++++ ./win32/rpcgen/rpc_scan.h	2011-08-27 22:28:38 +0000
+@@ -89,6 +89,7 @@
+ 	TOK_DEFAULT,
+ 	TOK_ENUM,
+ 	TOK_TYPEDEF,
++	TOK_HYPER,
+ 	TOK_INT,
+ 	TOK_SHORT,
+ 	TOK_LONG,
+--- ./win32/rpcgen/rpc_util.c	2001-11-05 10:21:54 +0000
++++ ./win32/rpcgen/rpc_util.c	2011-08-27 23:26:24 +0000
+@@ -398,6 +398,7 @@
+ 			     {TOK_TYPEDEF, "typedef"},
+ 			     {TOK_INT, "int"},
+ 			     {TOK_SHORT, "short"},
++			     {TOK_HYPER, "hyper"},
+ 			     {TOK_LONG, "long"},
+ 			     {TOK_UNSIGNED, "unsigned"},
+ 			     {TOK_DOUBLE, "double"},
