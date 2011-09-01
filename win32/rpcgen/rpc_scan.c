@@ -404,6 +404,7 @@ static token symbols[] = {
 			  {TOK_INT, "int"},
 			  {TOK_UNSIGNED, "unsigned"},
 			  {TOK_SHORT, "short"},
+			  {TOK_HYPER, "hyper"},
 			  {TOK_LONG, "long"},
 			  {TOK_FLOAT, "float"},
 			  {TOK_DOUBLE, "double"},

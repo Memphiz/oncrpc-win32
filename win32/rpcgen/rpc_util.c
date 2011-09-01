@@ -398,6 +398,7 @@ static token tokstrings[] = {
 			     {TOK_TYPEDEF, "typedef"},
 			     {TOK_INT, "int"},
 			     {TOK_SHORT, "short"},
+			     {TOK_HYPER, "hyper"},
 			     {TOK_LONG, "long"},
 			     {TOK_UNSIGNED, "unsigned"},
 			     {TOK_DOUBLE, "double"},

@@ -3,7 +3,7 @@
 
 # If the rpc include directory is not included in the standard path
 # you have to give the path to it here.
-RPCINCLUDEPATH = ..
+RPCINCLUDEPATH = ..\include
 
 # If the rpc library is not included in the standard lib path
 # you have to give the path to it here.

@@ -89,6 +89,7 @@ enum tok_kind {
 	TOK_DEFAULT,
 	TOK_ENUM,
 	TOK_TYPEDEF,
+	TOK_HYPER,
 	TOK_INT,
 	TOK_SHORT,
 	TOK_LONG,

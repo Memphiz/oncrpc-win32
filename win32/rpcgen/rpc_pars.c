@@ -393,6 +393,10 @@ get_type(prefixp, typep, dkind)
 	case TOK_UNSIGNED:
 		unsigned_dec(typep);
 		break;
+	case TOK_HYPER:
+		*typep = "int64_t";
+		(void) peekscan(TOK_HYPER, &tok);
+		break;
 	case TOK_SHORT:
 		*typep = "short";
 		(void) peekscan(TOK_INT, &tok);
@@ -433,6 +437,11 @@ unsigned_dec(typep)
 	case TOK_CHAR:
 		get_token(&tok);
 		*typep = "u_char";
+		break;
+	case TOK_HYPER:
+		get_token(&tok);
+		*typep = "uint64_t";
+		(void) peekscan(TOK_HYPER, &tok);
 		break;
 	case TOK_SHORT:
 		get_token(&tok);

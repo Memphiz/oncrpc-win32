@@ -56,6 +56,11 @@ xdr_double
 xdr_enum
 xdr_float
 xdr_free
+xdr_hyper
+xdr_int32_t
+xdr_uint32_t
+xdr_int64_t
+xdr_uint64_t
 xdr_int
 xdr_long
 xdr_netobj
@@ -70,6 +75,7 @@ xdr_short
 xdr_string
 xdr_u_char
 xdr_u_int
+xdr_u_hyper
 xdr_u_long
 xdr_u_short
 xdr_union

@@ -153,6 +153,74 @@ xdr_u_int(xdrs, up)
 }
 
 /*
+ * XDR hyper integers
+ */
+bool_t
+xdr_u_hyper(xdrs, lp)
+	register XDR *xdrs;
+	unsigned hyper *lp;
+{
+	if (xdrs->x_op == XDR_ENCODE) {
+		unsigned long l;
+
+		l = (*lp >> 32) & 0xffffffff;
+		if (!XDR_PUTLONG(xdrs, &l))
+			return (FALSE);
+
+		l = *lp & 0xffffffff;
+		return (XDR_PUTLONG(xdrs, &l));
+	}
+
+	if (xdrs->x_op == XDR_DECODE) {
+		unsigned long l;
+
+		if (!XDR_GETLONG(xdrs, &l))
+			return (FALSE);
+
+		*lp = l;
+		*lp = (*lp) << 32;
+		
+		if (!XDR_GETLONG(xdrs, &l))
+			return (FALSE);
+
+		*lp |= l;
+
+		return (TRUE);
+	}
+
+	if (xdrs->x_op == XDR_FREE)
+		return (TRUE);
+
+	return (FALSE);
+}
+
+bool_t
+xdr_hyper(xdrs, lp)
+	register XDR *xdrs;
+	hyper *lp;
+{
+	return xdr_u_hyper(xdrs, lp);
+}
+
+bool_t
+xdr_int64_t(xdrs, lp)
+	register XDR *xdrs;
+	hyper *lp;
+{
+	return xdr_u_hyper(xdrs, lp);
+}
+
+bool_t
+xdr_uint64_t(xdrs, lp)
+	register XDR *xdrs;
+	hyper *lp;
+{
+	return xdr_u_hyper(xdrs, lp);
+}
+
+
+
+/*
  * XDR long integers
  * same as xdr_u_long - open coded to save a proc call!
  */
@@ -173,6 +241,22 @@ xdr_long(xdrs, lp)
 
 	return (FALSE);
 }
+
+bool_t
+xdr_uint32_t(xdrs, lp)
+	register XDR *xdrs;
+	long *lp;
+{
+	return xdr_u_long(xdrs, lp);
+}
+bool_t
+xdr_int32_t(xdrs, lp)
+	register XDR *xdrs;
+	long *lp;
+{
+	return xdr_long(xdrs, lp);
+}
+
 
 /*
  * XDR unsigned long integers
