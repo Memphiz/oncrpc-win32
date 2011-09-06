@@ -26,7 +26,7 @@
 #define DllImport   __declspec( dllimport )
 #endif
 
-#if defined _W95 || defined _NT || defined _WINNT
+#ifdef _WIN32
 #include <stdio.h>
 #include <time.h>
 #include <string.h>

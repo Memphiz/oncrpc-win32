@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\librpc\authunix.c" />
+    <ClCompile Include="..\..\librpc\Auth_non.c" />
+    <ClCompile Include="..\..\librpc\Auth_uni.c" />
+    <ClCompile Include="..\..\librpc\bcopy.c" />
+    <ClCompile Include="..\..\librpc\Bindresv.c" />
+    <ClCompile Include="..\..\librpc\clnt_gen.c" />
+    <ClCompile Include="..\..\librpc\Clnt_per.c" />
+    <ClCompile Include="..\..\librpc\clnt_raw.c" />
+    <ClCompile Include="..\..\librpc\clnt_sim.c" />
+    <ClCompile Include="..\..\librpc\Clnt_tcp.c" />
+    <ClCompile Include="..\..\librpc\Clnt_udp.c" />
+    <ClCompile Include="..\..\librpc\Getrpcen.c" />
+    <ClCompile Include="..\..\librpc\Getrpcpo.c" />
+    <ClCompile Include="..\..\librpc\Get_myad.c" />
+    <ClCompile Include="..\..\librpc\nt.c" />
+    <ClCompile Include="..\..\librpc\Pmap_cln.c" />
+    <ClCompile Include="..\..\librpc\pmap_get.c" />
+    <ClCompile Include="..\..\librpc\pmap_gma.c" />
+    <ClCompile Include="..\..\librpc\pmap_pr.c" />
+    <ClCompile Include="..\..\librpc\pmap_pro.c" />
+    <ClCompile Include="..\..\librpc\Pmap_rmt.c" />
+    <ClCompile Include="..\..\librpc\portmap.c" />
+    <ClCompile Include="..\..\librpc\rpc_call.c" />
+    <ClCompile Include="..\..\librpc\rpc_comm.c" />
+    <ClCompile Include="..\..\librpc\rpc_prot.c" />
+    <ClCompile Include="..\..\librpc\Svc.c" />
+    <ClCompile Include="..\..\librpc\svc_auth.c" />
+    <ClCompile Include="..\..\librpc\Svc_autu.c" />
+    <ClCompile Include="..\..\librpc\svc_raw.c" />
+    <ClCompile Include="..\..\librpc\Svc_run.c" />
+    <ClCompile Include="..\..\librpc\Svc_simp.c" />
+    <ClCompile Include="..\..\librpc\Svc_tcp.c" />
+    <ClCompile Include="..\..\librpc\Svc_udp.c" />
+    <ClCompile Include="..\..\librpc\Xdr.c" />
+    <ClCompile Include="..\..\librpc\Xdr_arra.c" />
+    <ClCompile Include="..\..\librpc\xdr_floa.c" />
+    <ClCompile Include="..\..\librpc\xdr_mem.c" />
+    <ClCompile Include="..\..\librpc\Xdr_rec.c" />
+    <ClCompile Include="..\..\librpc\Xdr_refe.c" />
+    <ClCompile Include="..\..\librpc\xdr_stdi.c" />
+    <ClCompile Include="..\..\librpc\Xdr_strarr.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\librpc\all_oncrpc.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1D1F3B25-5740-4634-A8B7-E075C73AFBB2}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>librpc</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
