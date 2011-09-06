@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F275B682-06CC-4A21-985F-9B862D5E82BF}</ProjectGuid>
+    <ProjectGuid>{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>portmap</RootNamespace>
+    <RootNamespace>rpcgen</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,6 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>..\..\bin;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -51,12 +52,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>oncrpc.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\bin\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>oncrpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,19 +69,30 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>..\..\bin\pm_ascii.exe</OutputFile>
-      <AdditionalDependencies>oncrpc.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>..\..\bin\$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalDependencies>oncrpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\librpc\portmap.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_clnt.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_cout.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_hout.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_main.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_pars.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_scan.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_svco.c" />
+    <ClCompile Include="..\..\rpcgen\rpc_util.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\rpcgen\rpc_pars.h" />
+    <ClInclude Include="..\..\rpcgen\rpc_scan.h" />
+    <ClInclude Include="..\..\rpcgen\rpc_util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

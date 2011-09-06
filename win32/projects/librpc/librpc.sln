@@ -8,6 +8,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "portmap", "..\portmap\portm
 		{1D1F3B25-5740-4634-A8B7-E075C73AFBB2} = {1D1F3B25-5740-4634-A8B7-E075C73AFBB2}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rpcgen", "..\rpcgen\rpcgen.vcxproj", "{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D1F3B25-5740-4634-A8B7-E075C73AFBB2} = {1D1F3B25-5740-4634-A8B7-E075C73AFBB2}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +27,10 @@ Global
 		{F275B682-06CC-4A21-985F-9B862D5E82BF}.Debug|Win32.Build.0 = Debug|Win32
 		{F275B682-06CC-4A21-985F-9B862D5E82BF}.Release|Win32.ActiveCfg = Release|Win32
 		{F275B682-06CC-4A21-985F-9B862D5E82BF}.Release|Win32.Build.0 = Release|Win32
+		{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}.Debug|Win32.Build.0 = Debug|Win32
+		{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}.Release|Win32.ActiveCfg = Release|Win32
+		{157F4BFC-5D4B-486E-91E5-DCEAF8589BA9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
