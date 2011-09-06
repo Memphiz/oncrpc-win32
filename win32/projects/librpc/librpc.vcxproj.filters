@@ -74,9 +74,6 @@
     <ClCompile Include="..\..\librpc\Pmap_rmt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\librpc\portmap.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\librpc\rpc_call.c">
       <Filter>Source Files</Filter>
     </ClCompile>
