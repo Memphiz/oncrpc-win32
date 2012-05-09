@@ -67,8 +67,13 @@
 
 #ifdef WIN32
 //#define FD_SETSIZE	128
+#ifdef ONCRPCDLL
 #define DllExport	__declspec( dllexport )
 #define DllImport	__declspec( dllimport )
+#else
+#define DllExport	extern
+#define DllImport	extern
+#endif
 
 #include <stdlib.h>
 #include <windows.h>
