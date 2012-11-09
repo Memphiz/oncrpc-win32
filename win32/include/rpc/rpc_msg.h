@@ -66,6 +66,7 @@
 
 #ifndef __RPC_MSG_HEADER__
 #define __RPC_MSG_HEADER__
+#include <rpc/types.h>
 
 #define RPC_MSG_VERSION		((u_long) 2)
 #define RPC_SERVICE_PORT	((u_short) 2048)
@@ -191,7 +192,7 @@ struct rpc_msg {
  * 	XDR *xdrs;
  * 	struct rpc_msg *cmsg;
  */
-DllExport bool_t	xdr_callmsg();
+ONCRPCAPI bool_t	xdr_callmsg();
 
 /*
  * XDR routine to pre-serialize the static part of a rpc message.
@@ -199,7 +200,7 @@ DllExport bool_t	xdr_callmsg();
  * 	XDR *xdrs;
  * 	struct rpc_msg *cmsg;
  */
-DllExport bool_t	xdr_callhdr();
+ONCRPCAPI bool_t	xdr_callhdr();
 
 /*
  * XDR routine to handle a rpc reply.
@@ -207,7 +208,7 @@ DllExport bool_t	xdr_callhdr();
  * 	XDR *xdrs;
  * 	struct rpc_msg *rmsg;
  */
-DllExport bool_t	xdr_replymsg();
+ONCRPCAPI bool_t	xdr_replymsg();
 
 /*
  * Fills in the error part of a reply message.

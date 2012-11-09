@@ -65,6 +65,7 @@
 
 #ifndef __XDR_HEADER__
 #define __XDR_HEADER__
+#include <rpc/types.h>
 
 /*
  * XDR provides a conventional way for converting between C data
@@ -249,36 +250,36 @@ struct xdr_discrim {
 /*
  * These are the "generic" xdr routines.
  */
-DllExport bool_t	xdr_void();
-DllExport bool_t	xdr_int();
-DllExport bool_t	xdr_u_int();
-DllExport bool_t	xdr_long();
-DllExport bool_t	xdr_u_long();
-DllExport bool_t	xdr_hyper();
-DllExport bool_t	xdr_u_hyper();
-DllExport bool_t	xdr_int32_t();
-DllExport bool_t	xdr_uint32_t();
-DllExport bool_t	xdr_int64_t();
-DllExport bool_t	xdr_uint64_t();
-DllExport bool_t	xdr_short();
-DllExport bool_t	xdr_u_short();
-DllExport bool_t	xdr_bool();
-DllExport bool_t	xdr_enum();
-DllExport bool_t	xdr_array();
-DllExport bool_t	xdr_bytes();
-DllExport bool_t	xdr_opaque();
-DllExport bool_t	xdr_string();
-DllExport bool_t	xdr_union();
-DllExport bool_t	xdr_char();
-DllExport bool_t	xdr_u_char();
-DllExport bool_t	xdr_vector();
-DllExport bool_t	xdr_float();
-DllExport bool_t	xdr_double();
-DllExport bool_t	xdr_reference();
-DllExport bool_t	xdr_pointer();
-DllExport bool_t	xdr_wrapstring();
-DllExport void      xdr_free();
-DllExport bool_t    xdr_strarray();
+ONCRPCAPI bool_t	xdr_void();
+ONCRPCAPI bool_t	xdr_int();
+ONCRPCAPI bool_t	xdr_u_int();
+ONCRPCAPI bool_t	xdr_long();
+ONCRPCAPI bool_t	xdr_u_long();
+ONCRPCAPI bool_t	xdr_hyper();
+ONCRPCAPI bool_t	xdr_u_hyper();
+ONCRPCAPI bool_t	xdr_int32_t();
+ONCRPCAPI bool_t	xdr_uint32_t();
+ONCRPCAPI bool_t	xdr_int64_t();
+ONCRPCAPI bool_t	xdr_uint64_t();
+ONCRPCAPI bool_t	xdr_short();
+ONCRPCAPI bool_t	xdr_u_short();
+ONCRPCAPI bool_t	xdr_bool();
+ONCRPCAPI bool_t	xdr_enum();
+ONCRPCAPI bool_t	xdr_array();
+ONCRPCAPI bool_t	xdr_bytes();
+ONCRPCAPI bool_t	xdr_opaque();
+ONCRPCAPI bool_t	xdr_string();
+ONCRPCAPI bool_t	xdr_union();
+ONCRPCAPI bool_t	xdr_char();
+ONCRPCAPI bool_t	xdr_u_char();
+ONCRPCAPI bool_t	xdr_vector();
+ONCRPCAPI bool_t	xdr_float();
+ONCRPCAPI bool_t	xdr_double();
+ONCRPCAPI bool_t	xdr_reference();
+ONCRPCAPI bool_t	xdr_pointer();
+ONCRPCAPI bool_t	xdr_wrapstring();
+ONCRPCAPI void      xdr_free();
+ONCRPCAPI bool_t    xdr_strarray();
 
 /*
  * Common opaque bytes objects used by many rpc protocols;
@@ -290,17 +291,17 @@ struct netobj {
 	char	*n_bytes;
 };
 typedef struct netobj netobj;
-DllExport bool_t   xdr_netobj();
+ONCRPCAPI bool_t   xdr_netobj();
 
 /*
  * These are the public routines for the various implementations of
  * xdr streams.
  */
-DllExport void   xdrmem_create();		/* XDR using memory buffers */
-DllExport void   xdrstdio_create();	/* XDR using stdio library */
-DllExport void   xdrrec_create();		/* XDR pseudo records for tcp */
-DllExport bool_t xdrrec_endofrecord();	/* make end of xdr record */
-DllExport bool_t xdrrec_skiprecord();	/* move to beginning of next record */
-DllExport bool_t xdrrec_eof();		/* true if no more input */
+ONCRPCAPI void   xdrmem_create();		/* XDR using memory buffers */
+ONCRPCAPI void   xdrstdio_create();	/* XDR using stdio library */
+ONCRPCAPI void   xdrrec_create();		/* XDR pseudo records for tcp */
+ONCRPCAPI bool_t xdrrec_endofrecord();	/* make end of xdr record */
+ONCRPCAPI bool_t xdrrec_skiprecord();	/* move to beginning of next record */
+ONCRPCAPI bool_t xdrrec_eof();		/* true if no more input */
 
 #endif /* __XDR_HEADER__ */

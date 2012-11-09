@@ -68,6 +68,7 @@
 
 #ifndef __AUTH_HEADER__
 #define __AUTH_HEADER__
+#include <rpc/types.h>
 
 #define MAX_AUTH_BYTES	400
 #define MAXNETNAMELEN	255	/* maximum length of network user's name */
@@ -112,7 +113,7 @@ union des_block {
 };
 #endif
 typedef union des_block des_block;
-DllExport bool_t xdr_des_block();
+ONCRPCAPI bool_t xdr_des_block();
 
 /*
  * Authentication info.  Opaque to client.
@@ -182,11 +183,11 @@ extern struct opaque_auth _null_auth;
 #ifdef __BORLANDC__
 extern __declspec(dllimport) struct opaque_auth _null_auth;
 #else
-DllExport struct opaque_auth _null_auth;
+extern ONCRPCAPI struct opaque_auth _null_auth;
 #endif
 #endif
 #else  /* not WIN32 */
-DllExport struct opaque_auth _null_auth;
+extern ONCRPCAPI struct opaque_auth _null_auth;
 #endif
 
 
@@ -203,10 +204,10 @@ DllExport struct opaque_auth _null_auth;
  *	int len;
  *	int *aup_gids;
  */
-DllExport AUTH *authunix_create();
-DllExport AUTH *authunix_create_default();	/* takes no parameters */
-DllExport AUTH *authnone_create();		/* takes no parameters */
-DllExport AUTH *authdes_create();
+ONCRPCAPI AUTH *authunix_create();
+ONCRPCAPI AUTH *authunix_create_default();	/* takes no parameters */
+ONCRPCAPI AUTH *authnone_create();		/* takes no parameters */
+ONCRPCAPI AUTH *authdes_create();
 
 #define AUTH_NONE	0		/* no authentication */
 #define	AUTH_NULL	0		/* backward compatibility */

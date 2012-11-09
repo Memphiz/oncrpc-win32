@@ -89,8 +89,10 @@ extern char *malloc();
 #include <sys/time.h>
 #endif
 
+#ifndef WIN32
 #ifndef INADDR_LOOPBACK
 #define       INADDR_LOOPBACK         (u_long)0x7F000001
+#endif
 #endif
 #ifndef MAXHOSTNAMELEN
 #define        MAXHOSTNAMELEN  64
@@ -102,5 +104,22 @@ typedef unsigned long u_long;
 typedef unsigned short u_short;
 
 #include <stdint.h>
+
+#ifndef WIN32
+#define ONCRPCAPI
+#else // WIN32
+#ifndef ONCRPCAPI
+#ifdef ONCRPC_STATIC
+#define ONCRPCAPI
+#else // ONCRPC_STATIC
+#ifdef ONCRPCDLL
+#define ONCRPCAPI   __declspec( dllexport )
+#else // ONCRPCDLL
+#define ONCRPCAPI	__declspec( dllimport )
+#endif // !ONCRPCDLL
+#endif // !ONCRPC_STATIC
+#endif // !ONCRPCAPI
+#endif // !WIN32
+
 
 #endif /* ndef __TYPES_RPC_HEADER__ */
