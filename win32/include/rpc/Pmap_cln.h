@@ -84,10 +84,11 @@
  *		where resp points to the results of the call and raddr is the
  *		address if the responder to the broadcast.
  */
+#include <rpc/types.h>
 
-DllExport bool_t		pmap_set();
-DllExport bool_t		pmap_unset();
-DllExport struct pmaplist	*pmap_getmaps();
-enum clnt_stat		pmap_rmtcall();
-DllExport enum clnt_stat		clnt_broadcast();
-DllExport u_short		pmap_getport();
+ONCRPCAPI bool_t		pmap_set();
+ONCRPCAPI bool_t		pmap_unset();
+ONCRPCAPI struct pmaplist	*pmap_getmaps();
+ONCRPCAPI enum clnt_stat		pmap_rmtcall();
+ONCRPCAPI enum clnt_stat		clnt_broadcast();
+ONCRPCAPI u_short		pmap_getport();

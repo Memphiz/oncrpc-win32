@@ -19,12 +19,6 @@
 #define __all_oncrpc_includes__
 
 #ifdef WIN32
-#ifndef DllExport
-#define DllExport	__declspec( dllexport )
-#endif
-#ifndef DllImport
-#define DllImport   __declspec( dllimport )
-#endif
 
 #ifdef _WIN32
 #include <stdio.h>
@@ -34,6 +28,7 @@
 #include <malloc.h>
 #endif
 
+#include <rpc/types.h>
 #include <rpc/netdb.h>
 #include <rpc/rpc.h>
 #include <rpc/xdr.h>
@@ -44,6 +39,7 @@
 #include <rpc/pmap_pro.h>
 #include <rpc/pmap_rmt.h>
 #include <rpc/xdr.h>
+#include <rpc/bcopy.h>
 #include <sys/types.h>
 #include <io.h>
 #include <errno.h>
@@ -77,10 +73,7 @@
 #include <arpa/inet.h>
 #endif
 
-DllExport void get_myaddress(struct sockaddr_in *addr);
+ONCRPCAPI void get_myaddress(struct sockaddr_in *addr);
 int bindresvport(int sd,struct sockaddr_in *sin);
-void bcopy(char *s1,char *s2, int len);
-void bzero(char *s, int len);
-int bcmp(char *s1, char *s2, int len);
 
 #endif  /*__all_oncrpc_includes__*/

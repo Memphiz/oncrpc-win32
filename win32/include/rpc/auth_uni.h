@@ -72,6 +72,7 @@
 
 #ifndef __AUTH_UNIX_HEADER__
 #define __AUTH_UNIX_HEADER__
+#include <rpc/types.h>
 
 /* The machine name is part of a credential; it may not exceed 255 bytes */
 #define MAX_MACHINE_NAME 255
@@ -91,7 +92,7 @@ struct authunix_parms {
 	int	*aup_gids;
 };
 
-DllExport bool_t xdr_authunix_parms();
+ONCRPCAPI bool_t xdr_authunix_parms();
 
 /* 
  * If a response verifier has flavor AUTH_SHORT, 
