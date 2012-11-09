@@ -64,7 +64,7 @@
 
 #ifndef __SVC_HEADER__
 #define __SVC_HEADER__
-
+#include <rpc/types.h>
 /*
  * This interface must manage two items concerning remote procedure calling:
  *
@@ -181,7 +181,7 @@ struct svc_req {
  *	void (*dispatch)();
  *	int protocol;  /* like TCP or UDP, zero means do not register 
  */
-DllExport bool_t	svc_register();
+ONCRPCAPI bool_t	svc_register();
 
 /*
  * Service un-registration
@@ -190,7 +190,7 @@ DllExport bool_t	svc_register();
  *	u_long prog;
  *	u_long vers;
  */
-DllExport void	svc_unregister();
+ONCRPCAPI void	svc_unregister();
 
 /*
  * Transport registration.
@@ -198,7 +198,7 @@ DllExport void	svc_unregister();
  * xprt_register(xprt)
  *	SVCXPRT *xprt;
  */
-DllExport void	xprt_register();
+ONCRPCAPI void	xprt_register();
 
 /*
  * Transport un-register
@@ -206,7 +206,7 @@ DllExport void	xprt_register();
  * xprt_unregister(xprt)
  *	SVCXPRT *xprt;
  */
-DllExport void	xprt_unregister();
+ONCRPCAPI void	xprt_unregister();
 
 
 
@@ -237,14 +237,14 @@ DllExport void	xprt_unregister();
  * deadlock the caller and server processes!
  */
 
-DllExport bool_t	svc_sendreply();
-DllExport void	svcerr_decode();
-DllExport void	svcerr_weakauth();
-DllExport void	svcerr_noproc();
-DllExport void	svcerr_progvers();
-DllExport void	svcerr_auth();
-DllExport void	svcerr_noprog();
-DllExport void	svcerr_systemerr();
+ONCRPCAPI bool_t	svc_sendreply();
+ONCRPCAPI void	svcerr_decode();
+ONCRPCAPI void	svcerr_weakauth();
+ONCRPCAPI void	svcerr_noproc();
+ONCRPCAPI void	svcerr_progvers();
+ONCRPCAPI void	svcerr_auth();
+ONCRPCAPI void	svcerr_noprog();
+ONCRPCAPI void	svcerr_systemerr();
     
 /*
  * Lowest level dispatching -OR- who owns this process anyway.
@@ -269,11 +269,11 @@ extern fd_set svc_fdset;
 #ifdef __BORLANDC__
 extern __import fd_set svc_fdset;
 #else
-DllExport fd_set svc_fdset;
+extern ONCRPCAPI fd_set svc_fdset;
 #endif
 #endif
 #else
-DllExport fd_set svc_fdset;
+extern ONCRPCAPI fd_set svc_fdset;
 #endif
 #define svc_fds svc_fdset.fds_bits[0]	/* compatibility */
 #else
@@ -286,9 +286,9 @@ extern int svc_fds;
  */
 extern void rpctest_service();
 
-DllExport void	svc_getreq();
-DllExport void	svc_getreqset();	/* takes fdset instead of int */
-DllExport void	svc_run(); 	 /* never returns */
+ONCRPCAPI void	svc_getreq();
+ONCRPCAPI void	svc_getreqset();	/* takes fdset instead of int */
+ONCRPCAPI void	svc_run(); 	 /* never returns */
 
 /*
  * Socket to use on svcxxx_create call to get default socket
@@ -302,18 +302,18 @@ DllExport void	svc_run(); 	 /* never returns */
 /*
  * Memory based rpc for testing and timing.
  */
-DllExport SVCXPRT *svcraw_create();
+ONCRPCAPI SVCXPRT *svcraw_create();
 
 /*
  * Udp based rpc.
  */
-DllExport SVCXPRT *svcudp_create();
-DllExport SVCXPRT *svcudp_bufcreate();
+ONCRPCAPI SVCXPRT *svcudp_create();
+ONCRPCAPI SVCXPRT *svcudp_bufcreate();
 
 /*
  * Tcp based rpc.
  */
-DllExport SVCXPRT *svctcp_create();
+ONCRPCAPI SVCXPRT *svctcp_create();
 
 
 

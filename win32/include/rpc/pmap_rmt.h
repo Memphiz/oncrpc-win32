@@ -62,6 +62,7 @@
  *
  * Copyright (C) 1986, Sun Microsystems, Inc.
  */
+#include <rpc/types.h>
 
 struct rmtcallargs {
 	u_long prog, vers, proc, arglen;
@@ -69,7 +70,7 @@ struct rmtcallargs {
 	xdrproc_t xdr_args;
 };
 
-bool_t xdr_rmtcall_args();
+ONCRPCAPI bool_t xdr_rmtcall_args();
 
 struct rmtcallres {
 	u_long *port_ptr;
@@ -78,4 +79,4 @@ struct rmtcallres {
 	xdrproc_t xdr_results;
 };
 
-bool_t xdr_rmtcallres();
+ONCRPCAPI bool_t xdr_rmtcallres();

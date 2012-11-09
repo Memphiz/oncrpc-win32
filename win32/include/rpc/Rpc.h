@@ -67,13 +67,6 @@
 
 #ifdef WIN32
 //#define FD_SETSIZE	128
-#ifdef ONCRPCDLL
-#define DllExport	__declspec( dllexport )
-#define DllImport	__declspec( dllimport )
-#else
-#define DllExport	extern
-#define DllImport	extern
-#endif
 
 #include <stdlib.h>
 #include <windows.h>
@@ -85,15 +78,12 @@
 #define WSAerrno (WSAGetLastError())
 #define gettimeofday(tv,tz) ((tv)->tv_sec = time(0), (tv)->tv_usec = 0)
 
-DllExport int rpc_nt_init(void);
-DllExport int rpc_nt_exit(void);
-DllExport void nt_rpc_report();
-DllExport int xdr_opaque_auth();
+ONCRPCAPI int rpc_nt_init(void);
+ONCRPCAPI int rpc_nt_exit(void);
+ONCRPCAPI void nt_rpc_report();
+ONCRPCAPI int xdr_opaque_auth();
 
 #else  /* not WIN32 */ 
-#define DllExport	extern
-#define DllImport	extern
-
 #include <rpc/types.h>		/* some typedefs */
 #include <netinet/in.h>
 #endif

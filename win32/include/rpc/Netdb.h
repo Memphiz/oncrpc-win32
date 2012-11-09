@@ -58,6 +58,7 @@
 /*	@(#)rpc.h 1.8 87/07/24 SMI	*/
 
 /* Really belongs in <netdb.h> */
+#include <rpc/types.h>
 
 #if !defined(_STRUCT_RPCENT)
 struct rpcent {
@@ -68,6 +69,6 @@ struct rpcent {
 #define _STRUCT_RPCENT 1
 #endif /* _STRUCT_RPCENT */
 
-DllExport struct rpcent *getrpcbyname();
-DllExport struct rpcent *getrpcbynumber();
-DllExport struct rpcent *getrpcent();
+ONCRPCAPI struct rpcent *getrpcbyname();
+ONCRPCAPI struct rpcent *getrpcbynumber();
+ONCRPCAPI struct rpcent *getrpcent();
